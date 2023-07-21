@@ -35,6 +35,7 @@ class Game:
 
     def activate_automatic_mode(self):
         for move in self.solution:
+            self.get_and_show_solution()
             input(f'press any key to iterate with move {move}')
             self.board.apply_move(move)
             print(self.board)
@@ -60,36 +61,3 @@ class Game:
 
     def finish(self):
         print('Congratulations!!! Geniouss')
-
-# def game_init():
-    # print('Wellcome to Marcos lights out \n')
-    # size = int(input("I'll generate a game for you, choose a size: "))
-
-    # lights_array = [1 for _ in range(size**2)]
-    # print('\n Here is the starting board:\n')
-    # print_board(lights_array)
-
-    # solution = 0
-    # while not is_game_finished(lights_array):
-    #     if not solution:
-    #       if input('want the solution? (y/n):') == 'y':
-    #         solution = solve_game(lights_array)
-    #         print(f'The solution is: {solution}')
-                
-    #     else:
-    #         solution = solve_game(lights_array)
-    #         print(f'The solution is: {solution}')
-    #         if input('automatic mode? (y/n):') == 'y':
-    #             lights_array = automatic_mode(lights_array, solution)
-    #             break
-
-    #     move = input(f'\ndigite um movimento, de 1 a {len(lights_array)}: ')
-    #     lights_array = apply_move(lights_array, int(move))
-    #     print_board(lights_array)
-            
-    
-    # print('Congratulations!!! Geniouss')
-    # return
-
-
-# game_init()

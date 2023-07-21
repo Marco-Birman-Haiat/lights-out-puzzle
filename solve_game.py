@@ -1,4 +1,3 @@
-import math
 from commands_matrix import CommandsMatrix
 
 class GameSolver():
@@ -9,7 +8,6 @@ class GameSolver():
         # self.board_state = 
 
     def get_solution(self, board):
-        side = int(math.sqrt(len(board)))
         self.append_board_to_commands(board)
         self.down_pivet_norm()
         self.update_solution_from_normalized_solver()
@@ -48,18 +46,3 @@ class GameSolver():
             if self.solver_matrix[r][row_index]:
                 self.solver_matrix[row_index], self.solver_matrix[r] = self.solver_matrix[r], self.solver_matrix[row_index]
                 break
-    
-
-# def is_solved(matrix):
-#     for ri, r in enumerate(matrix):
-#         for ci, c in enumerate(r):
-#           if ri == ci and not matrix[ri][ci]:
-#               return False
-#           elif ci < len(matrix) - 1 and matrix[ri][ci]:
-#               return False
-#     return True
-
-
-# if __name__ == '__main__':
-#     l = [1 for _ in range(9)]
-#     solve_game(l)

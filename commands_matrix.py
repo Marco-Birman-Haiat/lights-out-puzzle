@@ -9,9 +9,9 @@ class CommandsMatrix():
             for col_index in range(self.size**2):
                 if row_index == col_index:
                     self.data[row_index][col_index] = 1
-                if self.is_line_adjacent(row_index, col_index, self.size) or self.is_col_adjacent(row_index, col_index, self.size):
+                if (self.is_line_adjacent(row_index, col_index, self.size)
+                    or self.is_col_adjacent(row_index, col_index, self.size)):
                     self.data[row_index][col_index] = 1
-
 
     def is_line_adjacent(self, row_index, col_index, side):
         sides = self.is_in_side(row_index, side)
@@ -22,7 +22,6 @@ class CommandsMatrix():
         else:
             return abs(col_index - row_index) == 1
 
-
     def is_col_adjacent(self, i, j, side):
         sides = self.is_in_side(i, side)
         if sides and sides[1] == 't':
@@ -31,7 +30,6 @@ class CommandsMatrix():
             return j + side == i
         else:
             return j - side == i or j + side == i
-
 
     def is_in_side(self, i, side):
         top = (0 < i < side - 1, 't')
@@ -43,7 +41,3 @@ class CommandsMatrix():
         sides = list(filter(lambda x: x[0], sides))
 
         return sides[0] if sides else False
-
-
-# if __name__ == '__main__':
-# 	[print(row) for row in create_commands_matrix(3)]

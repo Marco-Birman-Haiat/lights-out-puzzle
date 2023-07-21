@@ -1,6 +1,7 @@
 import math
 from commands_matrix import CommandsMatrix
 
+
 class Board:
     def __init__(self, size: int) -> None:
         self.lights = [1 for _ in range(size**2)]
@@ -15,7 +16,6 @@ class Board:
     
     def __str__(self) -> str:
         print_array = []
-
         for l in self.lights:
             print_array.append(f' {l} |')
             self.side -= 1
