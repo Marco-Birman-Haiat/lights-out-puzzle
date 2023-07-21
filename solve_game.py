@@ -1,64 +1,65 @@
 import math
-from commands_matrix import create_commands_matrix
-from utils import binary_digit_sum
+from commands_matrix import CommandsMatrix
 
+class GameSolver():
+    solution = []
+    solver_matrix = []
+    def __init__(self, size: int) -> None:
+        self.commands_matrix = CommandsMatrix(size).data
+        # self.board_state = 
 
-def find_pivet_in_row(row_index, row):
-    return (row_index, row_index)
+    def get_solution(self, board):
+        side = int(math.sqrt(len(board)))
+        self.append_board_to_commands(board)
+        self.down_pivet_norm()
+        self.update_solution_from_normalized_solver()
+        return self.solution
 
-def delet_down(pivet, matrix):
-    pivet_col = pivet[1]
-    for i, row in enumerate(matrix):
-        if row[pivet_col] and pivet_col != i:
-            matrix[i] = list(map(lambda s, p: binary_digit_sum(s, p), matrix[i], matrix[pivet_col]))
-    return matrix
+    def append_board_to_commands(self, board):
+        self.solver_matrix = list(map(lambda r, l: r + [l], self.commands_matrix, board))
 
-def swap_to_pivet(matrix, row_index):
-    for r in range(row_index + 1, len(matrix)):
-        if matrix[r][row_index]:
-            matrix[row_index], matrix[r] = matrix[r], matrix[row_index]
-            break
-    return matrix
+    def down_pivet_norm(self):
+        for i, row in enumerate(self.solver_matrix):
+            pivet = self.find_pivet_in_row(i, row)
+            self.delete_down(pivet)
+        # return self.solver_matrix
 
-def down_pivet_norm(matrix):
-    for i, row in enumerate(matrix):
-        pivet = find_pivet_in_row(i, row)
-        if not matrix[pivet[0]][pivet[0]]:
-            matrix = swap_to_pivet(matrix, i)
-        delet_down(pivet, matrix)
-    return matrix
+    def update_solution_from_normalized_solver(self):
+        tags = list(range(1, len(self.commands_matrix) + 1))
+        self.solution = list(map(lambda x: x[-1], self.solver_matrix))
+        ## usar variaveis para descrever o que esta acontecendo ou trocar in place?
+        self.solution = list(map(lambda x, y: x * y , self.solution, tags))
+        self.solution =  [button for button in self.solution if button]
 
-def reduce_matrix(matrix):
-    matrix = down_pivet_norm(matrix)
-    return matrix
+    def find_pivet_in_row(self, row_index, row):
+        if not self.solver_matrix[row_index][row_index]:
+            self.swap_to_pivet(row_index)
+        return (row_index, row_index)
+
+    def delete_down(self, pivet):
+        pivet_col = pivet[1]
+        for i, row in enumerate(self.solver_matrix):
+            if row[pivet_col] and pivet_col != i:
+                self.solver_matrix[i] = list(map(lambda s, p: s ^ p, self.solver_matrix[i], self.solver_matrix[pivet_col]))
+        # return self.solver_matrix
+
+    def swap_to_pivet(self, row_index):
+        for r in range(row_index + 1, len(self.solver_matrix)):
+            if self.solver_matrix[r][row_index]:
+                self.solver_matrix[row_index], self.solver_matrix[r] = self.solver_matrix[r], self.solver_matrix[row_index]
+                break
     
 
-
-def is_solved(matrix):
-    for ri, r in enumerate(matrix):
-        for ci, c in enumerate(r):
-          if ri == ci and not matrix[ri][ci]:
-              return False
-          elif ci < len(matrix) - 1 and matrix[ri][ci]:
-              return False
-    return True
-
-def solve_game(lights):
-    side = int(math.sqrt(len(lights)))
-    effects_matrix = create_commands_matrix(side)
-
-    sm = list(map(lambda r, l: r + [l], effects_matrix, lights))
-    
-    reduced_matrix = reduce_matrix(sm)
-    answer = list(map(lambda x: x[-1], reduced_matrix))
-    tags = list(range(1, len(lights) + 1))
-    tag_answer = list(map(lambda x, y: x * y , answer, tags))
-    return [button for button in tag_answer if button]
-    
-    # [print(row) for row in sm]
-  
+# def is_solved(matrix):
+#     for ri, r in enumerate(matrix):
+#         for ci, c in enumerate(r):
+#           if ri == ci and not matrix[ri][ci]:
+#               return False
+#           elif ci < len(matrix) - 1 and matrix[ri][ci]:
+#               return False
+#     return True
 
 
-if __name__ == '__main__':
-    l = [1 for _ in range(9)]
-    solve_game(l)
+# if __name__ == '__main__':
+#     l = [1 for _ in range(9)]
+#     solve_game(l)
