@@ -61,11 +61,13 @@ venv\Scripts\activate
 source .venv/bin/activate
 ```
 
-### Download Dependencies
+### Download Dependencies and Execute app file
 
 Install the required dependencies using pip:
 
 ```
 pip install -r requirements.txt
+
+python3 app.py
 ```
 
