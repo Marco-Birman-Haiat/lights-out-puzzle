@@ -12,7 +12,7 @@
 
 ## Introduction
 
-Lights Out Puzzle in the Terminal is a Python project that brings the classic "Lights Out" puzzle to the command-line interface. The game challenges users to solve a grid of lights by toggling them on or off. Players can either solve the puzzle on their own or request the application to find the solution. The project's main goal is to provide a fun and interactive way to learn various Python concepts, including object-oriented programming, data structures, matrix operations, linear algebra Gaussian reduction, and general Python programming.
+Lights Out Puzzle in the Terminal is a Python project that brings the classic "Lights Out" puzzle to the command-line interface. The game challenges users to solve a grid of lights by toggling them on or off. Players can either solve the puzzle on their own or request the application to find the solution. The project's main goal is to provide a fun and interactive way to learn various Python concepts, including object-oriented programming, data structures, matrix operations, linear algebra Gaussian elimination, and general Python programming.
 
 ## Objective
 
@@ -20,7 +20,7 @@ The primary objective of this project is to create a fully functional "Lights Ou
 
 1. Gain practical experience in Python object-oriented programming (OOP) and design patterns.
 2. Implement and manage data structures to represent the game board and its state.
-3. Perform matrix operations and apply linear algebra techniques, such as Gaussian reduction, to solve the puzzle.
+3. Perform matrix operations and apply linear algebra techniques, such as Gaussian elimination, to solve the puzzle.
 4. Enhance overall Python programming skills, including coding style, debugging, and testing.
 
 ## Game Rules
